@@ -1,0 +1,5 @@
+# python gitignore 를 만들어줘
+# gitignore.io
+*.pyc
+__pycache__/
+venv/
