@@ -18,8 +18,46 @@ data = json.loads(result.text)
  
 print(data)
 
-new_data= dict({'city': data['name'], 'temp':data['main']['temp'], 'temp_diff': round(data['main']['temp_max']-data['main']['temp_min'], 3),
-                'humidity':data['main']['humidity'], 'clouds':data['clouds']['all'], 'wind': data['wind']['speed']})
+def range_temp(temp):
+    if temp<10: 
+        temp_str= '엄청 추움'
+    elif temp<20:
+        temp_str= '추움'
+    elif temp<30:
+        temp_str= '선선'
+    else:
+        temp_str='더움'
+    
+    return temp_str
+
+def temp_diff(temp_diff):
+    if temp_diff>10:
+        return '큰 일교차'
+    else:
+        return '작은 일교차'
+    
+def humidity(humdity):
+    if humdity>85:
+        return '우천 예보'
+    else:
+        return '우천 예보 없음'
+    
+def cloud(cloud):
+    if cloud>90:
+        return '구름이 많다'
+    elif cloud<20:
+        return '쨍쨍'
+    else:
+        return '구름 조금'
+    
+def wind(wind):
+    if wind>7:
+        return '강풍'
+    else:
+        return '강풍 예보 없음'
+    
+new_data= dict({'city': data['name'], 'temp':range_temp(data['main']['temp']), 'temp_diff': temp_diff(data['main']['temp_max']-data['main']['temp_min']),
+                'humidity':humidity(data['main']['humidity']), 'clouds':cloud(data['clouds']['all']), 'wind': wind(data['wind']['speed'])})
 
 
 print(new_data)
@@ -30,11 +68,11 @@ llm = ChatUpstage()
 
 prompt_template = PromptTemplate.from_template(
     """
-    날씨와 패션 트랜드에 맞춰 옷을 정해주세요.
+    날씨(new_data)와 패션 트랜드에 맞춰 옷을 정해주세요.
     user가 자신이 가지고 있는 옷 중 하나 input으로 준다면, 그 옷에 어울리는 다른 옷들을 정해주세요.
     user가 자신이 옷을 정하지 않을 수 있습니다. 그렇다면, 모든 옷을 정해주세요.
     존댓말로 답변해주세요.
-    예를 들어, 온도가 25.19, 일교차가 3,97, 습도가 50, 구름이 40, 바람이 3.09이고, user가 pants1(긴바지)을 골랐습니다. 
+    예를 들어, temp가 선선, temp_diff가 작은 일교차, 습도가 우천 예보 없음, 구름이 구름 조금, 바람이 강풍 예고 없음이고, user가 pants1(긴바지)을 골랐습니다. 
     Q. 상의를 골라주세요
     A. 일교차가 크지 않고, 비가 오지 않으며, 구름이 조금 있고 온도가 온건하므로, 패션트랜드를 고려해서 short_sleeve_T-Shirt2을 추천 합니다.
     ---
@@ -44,8 +82,8 @@ prompt_template = PromptTemplate.from_template(
     """
 )
 
-#chain = prompt_template | llm | StrOutputParser()
+chain = prompt_template | llm | StrOutputParser()
 
-#query = "오늘은 어떤 상의와 하의를 입을까?"
+query = "오늘은 어떤 상의와 하의를 입을까?"
 # context_docs = retriever.invoke("옷")
-#print(retriever.invoke({"question": query})) #, "Context": context_docs}))
+print(retriever.invoke({"question": query})) #, "Context": context_docs}))
