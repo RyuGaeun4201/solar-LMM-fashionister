@@ -4,8 +4,8 @@ def recommend_clothing(height, weight, age, nationality):
     # 더미 데이터를 사용한 추천 옷 텍스트 생성
     recommended_outfit = f"당신의 키: {height} cm, 체중: {weight} kg, 나이: {age}세, 국적: {nationality}에 기반하여, 우리는 가벼운 자켓, 청바지, 스니커즈가 포함된 캐주얼한 옷차림을 추천합니다."
     
-    # 더미 이미지 URL
-    dummy_image_url = "https://via.placeholder.com/1024"
+    # Unsplash에서 가져온 더미 이미지 URL
+    dummy_image_url = "https://source.unsplash.com/random/1024x1024"
     
     return recommended_outfit, dummy_image_url
 
@@ -28,8 +28,24 @@ oecd_countries = [
     "덴마크 🇩🇰",
     "핀란드 🇫🇮"
 ]
+
+# HTML for setting the title and favicon
+html_content = """
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>👗 Solar-LMM-Fashminator 옷 추천 시스템 👔</title>
+    <link rel="icon" href="https://source.unsplash.com/random/16x16" type="image/x-icon">
+</head>
+<body>
+</body>
+</html>
+"""
+
 # Gradio 인터페이스 설정
 with gr.Blocks() as ui:
+    gr.HTML(html_content)  # Add HTML for title and favicon
+    
     gr.Markdown("# 👗 Solar-LMM-Fashminator 옷 추천 시스템 👔")
     
     gr.Markdown("[📖 GitHub README](https://github.com/RyuGaeun4201/solar-LMM-fashionister/blob/main/README.md)")
@@ -38,7 +54,7 @@ with gr.Blocks() as ui:
         height = gr.Slider(minimum=100, maximum=250, value=176, label="📏 키 (cm)")
         weight = gr.Slider(minimum=30, maximum=200, value=78, label="⚖️ 몸무게 (kg)")
         age = gr.Slider(minimum=1, maximum=100, value=42, label="🎂 나이(한국나이)")
-        nationality = gr.Dropdown(choices=oecd_countries, value="대한민국", label="🌍 국적")
+        nationality = gr.Dropdown(choices=oecd_countries, value="대한민국 🇰🇷", label="🌍 국적")
         
     recommend_button = gr.Button("물어보기 🛒")
     
