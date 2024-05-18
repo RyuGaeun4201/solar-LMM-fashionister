@@ -44,7 +44,7 @@ html_content = """
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <title>👗 Solar-LMM-Fashminator 옷 추천 시스템 👔</title>
+    <title>👗 Solar-LLM-Fashminator 옷 추천 시스템 👔</title>
     <link rel="icon" href="https://source.unsplash.com/random/16x16" type="image/x-icon">
     <style>
         body.dark-mode { background-color: #121212; color: white; }
@@ -76,7 +76,7 @@ html_content = """
 with gr.Blocks() as ui:
     gr.HTML(html_content)  # Add HTML for title, favicon, and dark mode toggle
     
-    gr.Markdown("# 👗 Solar-LMM-Fashminator 옷 추천 시스템 👔")
+    gr.Markdown("# 👗 Solar-LLM-Fashminator 옷 추천 시스템 👔")
     
     gr.Markdown("[📖 GitHub README](https://github.com/RyuGaeun4201/solar-LMM-fashionister/blob/main/README.md)")
     
