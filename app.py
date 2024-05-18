@@ -1,11 +1,18 @@
 import gradio as gr
 
+from query import answer
+from diffusion import diffusion
+
 def recommend_clothing(height, weight, age, nationality):
+    
     # 더미 데이터를 사용한 추천 옷 텍스트 생성
-    recommended_outfit = f"당신의 키: {height} cm, 체중: {weight} kg, 나이: {age}세, 국적: {nationality}에 기반하여, 우리는 가벼운 자켓, 청바지, 스니커즈가 포함된 캐주얼한 옷차림을 추천합니다."
+    # recommended_outfit = f"당신의 키: {height} cm, 체중: {weight} kg, 나이: {age}세, 국적: {nationality}에 기반하여, 우리는 가벼운 자켓, 청바지, 스니커즈가 포함된 캐주얼한 옷차림을 추천합니다."
+    answer = answer(height, weight, age, nationality, "청바지")
+    recommended_outfit = answer
     
     # Unsplash에서 가져온 더미 이미지 URL
-    dummy_image_url = "https://source.unsplash.com/random/1024x1024"
+    diffusion(answer)
+    dummy_image_url = "solar-LMM-fashionister/outputs/result.jpg"
     
     return recommended_outfit, dummy_image_url
 

@@ -50,6 +50,4 @@ def wind(wind):
         return '강풍 예보 없음'
 
 def weather() :
-    return f"{range_temp(data['main']['temp'])}, {temp_diff(data['main']['temp_max']-data['main']['temp_min'])}, "
-new_data= dict({'city': data['name'], 'temp':range_temp(data['main']['temp']), 'temp_diff': temp_diff(data['main']['temp_max']-data['main']['temp_min']),
-                'humidity':humidity(data['main']['humidity']), 'clouds':cloud(data['clouds']['all']), 'wind': wind(data['wind']['speed'])})
+    return f"{range_temp(data['main']['temp'])}, {temp_diff(data['main']['temp_max']-data['main']['temp_min'])}, {humidity(data['main']['humidity'])}, {cloud(data['clouds']['all'])}, {wind(data['wind']['speed'])}"
