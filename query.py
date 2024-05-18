@@ -7,8 +7,7 @@ llm = ChatUpstage()
 
 prompt_template = PromptTemplate.from_template(
     """
-    Please provide most correct answer from the following context. 
-    If the answer is not present in the context, please write "The information is not present in the context."
+    Please provide most correct answer from the following context. Answer simplely.
     ---
     Question: {question}
     ---
@@ -17,6 +16,6 @@ prompt_template = PromptTemplate.from_template(
 )
 chain = prompt_template | llm | StrOutputParser()
 
-query = "Choose the clothes to wear today?"
-context_docs = retriever.invoke("clothes")
-print(chain.invoke({"question": query, "Context": context_docs}))
+query = "오늘은 어떤 상의와 하의를 입을까?"
+# context_docs = retriever.invoke("옷")
+print(retriever.invoke({"question": query})) #, "Context": context_docs}))
