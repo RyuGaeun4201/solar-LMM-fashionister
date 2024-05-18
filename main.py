@@ -9,6 +9,9 @@ def recommend_clothing(height, weight, age, nationality):
     
     return recommended_outfit, dummy_image_url
 
+# OECD 주요국 리스트
+oecd_countries = ["대한민국", "미국", "일본", "독일", "프랑스", "영국", "캐나다", "이탈리아", "호주", "스페인", "네덜란드", "스위스", "스웨덴", "노르웨이", "덴마크", "핀란드"]
+
 # Gradio 인터페이스 설정
 with gr.Blocks() as ui:
     gr.Markdown("# 👗 Solar-LMM-Fashminator 옷 추천 시스템 👔")
@@ -19,7 +22,7 @@ with gr.Blocks() as ui:
         height = gr.Slider(minimum=100, maximum=250, value=176, label="📏 키 (cm)")
         weight = gr.Slider(minimum=30, maximum=200, value=78, label="⚖️ 몸무게 (kg)")
         age = gr.Slider(minimum=1, maximum=100, value=42, label="🎂 나이(한국나이)")
-        nationality = gr.Textbox(label="🌍 국적", placeholder="예: 한국")
+        nationality = gr.Dropdown(choices=oecd_countries, value="대한민국", label="🌍 국적")
         
     recommend_button = gr.Button("물어보기 🛒")
     
