@@ -4,6 +4,11 @@
 
 **Fashminator**는 사용자가 키, 체중, 나이, 성별, 국적를 입력하면 날씨, 일정, 모임 목적에 맞춰 최신 패션 트렌드를 학습하여 최적의 옷을 추천해주는 시스템입니다. 추천 알고리즘을 향상시키기 위해 Solar LLM과 Diffusion LLM을 활용하며, Gradio를 사용하여 사용자 인터페이스를 제공합니다.
 
+## 발표 자료 
+[발표자료](https://docs.google.com/presentation/d/1uyAoUuMgXxiS-XoT_PCK_eb-_G8-RIJ_SeiYupHaJLI/edit?usp=sharing)
+
+## 데모
+![데모시연](./text.png)
 
 ## 기능
 
@@ -30,6 +35,7 @@
 
 ## 개발과정 문서
 [의논중인 문서](https://docs.google.com/document/d/132_GdweLA4OVlep6Rywna2vfH2TXkhGr_9l2hu02ILo/edit?usp=sharing)
+
 
 ## 수집데이터
 [학습데이터 소스](./data/data.csv)
