@@ -9,7 +9,7 @@ from langchain_upstage import UpstageLayoutAnalysisLoader
 from langchain_upstage import UpstageLayoutAnalysis
 warnings.filterwarnings("ignore")
 
-file_path = 
+file_path = "data/data1.pdf"
 
 llm = ChatUpstage()
 
@@ -35,11 +35,7 @@ text_splitter = RecursiveCharacterTextSplitter.from_language( # chunking
     chunk_size=1000, chunk_overlap=100, language=Language.HTML # 10%
 )
 
-loader = UpstageLayoutAnalysis(
-            file_path, split="page", output_type="text"
-         )
-
-layzer = UpstageLayoutAnalysisLoader("pdfs/kim-tse-2008.pdf", output_type="html")
+layzer = UpstageLayoutAnalysisLoader(file_path, output_type="html")
 docs = layzer.load()  # or layzer.lazy_load()
 
 splits = text_splitter.split_documents(docs)
@@ -47,5 +43,5 @@ splits = text_splitter.split_documents(docs)
 retriever = BM25Retriever.from_documents(splits) # search engine
 
 query = "What is bug classficiation?"
-context_docs = retriever.invoke("bug") # keyword를 넣음 -> embedding
+context_docs = retriever.invoke("bug")
 chain.invoke({"question": query, "Context": context_docs})
